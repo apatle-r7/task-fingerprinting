@@ -1,0 +1,119 @@
+Last login: Thu Jan 15 23:44:26 on ttys007
+apatle@PNQ-MBP-14619 ~ % ssh root@localhost -p 2222
+root@localhost's password: 
+Linux 81685af21437 6.12.54-linuxkit #1 SMP Tue Nov  4 21:21:47 UTC 2025 aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+root@81685af21437:~# cd /app && python3 -m fingerprint.cli --mode local --output fingerprint_report.json
+Wrote report to fingerprint_report.json
+root@81685af21437:/app# exit
+logout
+Connection to localhost closed.
+apatle@PNQ-MBP-14619 ~ % docker cp fingerprinting-container:/app/fingerprint_report.json ./fingerprint_report.json
+Successfully copied 5.63kB to /Users/apatle/fingerprint_report.json
+apatle@PNQ-MBP-14619 ~ % cat fingerprint_report.json
+{
+  "agent_metadata": {
+    "agent_version": "1.0.0",
+    "scan_id": "8203fb53-eaf7-4b3c-8779-eb4be5bafe8c",
+    "timestamp": "2026-01-15T18:17:06.255662+00:00",
+    "scan_type": "local",
+    "target_host": "localhost"
+  },
+  "system_info": {
+    "os": "Linux",
+    "version": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.1\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"",
+    "kernel": "6.12.54-linuxkit",
+    "cpu": "aarch64",
+    "evidence": {
+      "os_release": {
+        "command_run": "cat /etc/os-release",
+        "raw_output": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.1\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"",
+        "exit_code": 0,
+        "duration_seconds": 0.0015010833740234375
+      },
+      "kernel": {
+        "command_run": "uname -r",
+        "raw_output": "6.12.54-linuxkit",
+        "exit_code": 0,
+        "duration_seconds": 0.0006465911865234375
+      },
+      "cpu": {
+        "command_run": "uname -m",
+        "raw_output": "aarch64",
+        "exit_code": 0,
+        "duration_seconds": 0.002999544143676758
+      }
+    }
+  },
+  "software_inventory": [
+    {
+      "productName": "PyCharm Community Edition",
+      "versionNumber": "/bin/sh: 1: defaults: not found",
+      "architecture": "arm64",
+      "productFamily": "IDE",
+      "vendor": "JetBrains",
+      "evidence": {
+        "detection": {
+          "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.jetbrains.pycharm.ce'\"",
+          "raw_output": "/bin/sh: 1: mdfind: not found",
+          "exit_code": 127,
+          "duration_seconds": 0.0005233287811279297
+        },
+        "version": {
+          "command_run": "defaults read '/bin/sh: 1: mdfind: not found/Contents/Info' CFBundleShortVersionString",
+          "raw_output": "/bin/sh: 1: defaults: not found",
+          "exit_code": 127,
+          "duration_seconds": 0.0005614757537841797
+        }
+      }
+    },
+    {
+      "productName": "Slack",
+      "versionNumber": "/bin/sh: 1: defaults: not found",
+      "architecture": "arm64",
+      "productFamily": "Communication",
+      "vendor": "Slack Technologies",
+      "evidence": {
+        "detection": {
+          "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.tinyspeck.slackmacgap'\"",
+          "raw_output": "/bin/sh: 1: mdfind: not found",
+          "exit_code": 127,
+          "duration_seconds": 0.0004851818084716797
+        },
+        "version": {
+          "command_run": "defaults read '/bin/sh: 1: mdfind: not found/Contents/Info' CFBundleShortVersionString",
+          "raw_output": "/bin/sh: 1: defaults: not found",
+          "exit_code": 127,
+          "duration_seconds": 0.00045228004455566406
+        }
+      }
+    },
+    {
+      "productName": "Google Chrome",
+      "versionNumber": "/bin/sh: 1: defaults: not found",
+      "architecture": "arm64",
+      "productFamily": "Browser",
+      "vendor": "Google",
+      "evidence": {
+        "detection": {
+          "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.google.Chrome'\"",
+          "raw_output": "/bin/sh: 1: mdfind: not found",
+          "exit_code": 127,
+          "duration_seconds": 0.0005228519439697266
+        },
+        "version": {
+          "command_run": "defaults read '/bin/sh: 1: mdfind: not found/Contents/Info' CFBundleShortVersionString",
+          "raw_output": "/bin/sh: 1: defaults: not found",
+          "exit_code": 127,
+          "duration_seconds": 0.00046896934509277344
+        }
+      }
+    }
+  ]
+}%                                                                                                                     apatle@PNQ-MBP-14619 ~ % 
