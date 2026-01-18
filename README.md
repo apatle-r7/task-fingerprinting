@@ -1,4 +1,3 @@
-Hi Team.
 
 **Purpose**
 - **Repo**: This project gathers system and software "fingerprints" from target hosts and writes a structured JSON report. It supports running locally, against a remote host via SSH, or by launching a container and executing commands there.
@@ -45,7 +44,7 @@ python -m fingerprint.cli --mode remote --docker-image ubuntu:22.04 --output doc
 - **Core modules**: Implementation lives under the `fingerprint/` package: `executors.py`, `collectors/`, `output.py`, and `evidence.py`.
 - **Report builder**: The JSON report is created by `output.build_report()` and written by `output.write_report()`; a standalone top-level helper exists at `output.py` in the repository root as well.
 
-**What I Understood / Assumptions**
+**What I Understood**
 - **Design**: The project runs a series of commands (local/remote/container) to collect OS and software information and assembles them into a timestamped JSON report.
 - **Authentication**: Remote password auth is used by the `RemoteExecutor` via `sshpass`. If you prefer key-based auth, update the executor to use `ssh -i /path/to/key` or use an SSH agent.
 - **Docker flow**: `DockerExecutor` attempts to run a container, expose an SSH port, and connect back to it. This requires an image that runs an SSH server.
